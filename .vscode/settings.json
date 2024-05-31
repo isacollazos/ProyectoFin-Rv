@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ProyetoFInalRV_Version3.sln"
+    "dotnet.defaultSolution": "ProyectoFin-Rv.sln"
 }
