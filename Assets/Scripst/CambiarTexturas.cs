@@ -9,29 +9,23 @@ public class CambiarTextura : MonoBehaviour
     {
         public GameObject objeto;
         public List<Material> materiales;
-        public Button botonSiguiente;
-        public Button botonAnterior;
+        public Button botonCambiar; // Ahora solo tenemos un botón
         private int currentIndex = 0;
 
         public void Inicializar()
         {
-            if (botonSiguiente != null)
+            if (botonCambiar != null)
             {
-                botonSiguiente.onClick.AddListener(CambiarAlSiguienteMaterial);
-            }
-
-            if (botonAnterior != null)
-            {
-                botonAnterior.onClick.AddListener(CambiarAlMaterialAnterior);
+                botonCambiar.onClick.AddListener(CambiarMaterial); // El mismo botón para cambiar materiales
             }
         }
 
-        // M�todo para cambiar al siguiente material
-        public void CambiarAlSiguienteMaterial()
+        // Método para cambiar al siguiente material
+        public void CambiarMaterial()
         {
             if (materiales.Count == 0)
             {
-                Debug.LogWarning("La lista de materiales est� vac�a.");
+                Debug.LogWarning("La lista de materiales está vacía.");
                 return;
             }
 
@@ -39,20 +33,7 @@ public class CambiarTextura : MonoBehaviour
             ActualizarMaterial();
         }
 
-        // M�todo para cambiar al material anterior
-        public void CambiarAlMaterialAnterior()
-        {
-            if (materiales.Count == 0)
-            {
-                Debug.LogWarning("La lista de materiales est� vac�a.");
-                return;
-            }
-
-            currentIndex = (currentIndex - 1 + materiales.Count) % materiales.Count;
-            ActualizarMaterial();
-        }
-
-        // M�todo para actualizar el material del objeto
+        // Método para actualizar el material del objeto
         private void ActualizarMaterial()
         {
             if (objeto != null)
@@ -73,29 +54,16 @@ public class CambiarTextura : MonoBehaviour
         }
     }
 
-    // M�todo p�blico para cambiar al siguiente material de un objeto espec�fico
-    public void CambiarAlSiguienteMaterial(int objectIndex)
+    // Método público para cambiar al siguiente material de un objeto específico
+    public void CambiarMaterial(int objectIndex)
     {
         if (objectIndex >= 0 && objectIndex < listaDeObjetos.Count)
         {
-            listaDeObjetos[objectIndex].CambiarAlSiguienteMaterial();
+            listaDeObjetos[objectIndex].CambiarMaterial();
         }
         else
         {
-            Debug.LogWarning("�ndice de objeto fuera de rango.");
-        }
-    }
-
-    // M�todo p�blico para cambiar al material anterior de un objeto espec�fico
-    public void CambiarAlMaterialAnterior(int objectIndex)
-    {
-        if (objectIndex >= 0 && objectIndex < listaDeObjetos.Count)
-        {
-            listaDeObjetos[objectIndex].CambiarAlMaterialAnterior();
-        }
-        else
-        {
-            Debug.LogWarning("�ndice de objeto fuera de rango.");
+            Debug.LogWarning("Índice de objeto fuera de rango.");
         }
     }
 }
